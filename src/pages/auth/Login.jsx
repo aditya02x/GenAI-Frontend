@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,6 +14,8 @@ const Login = () => {
       email,
       password,
     });
+
+    navigate("/profile")
   };
 
   return (
@@ -75,11 +80,14 @@ const Login = () => {
         </form>
 
         {/* Footer */}
-        <p className="text-center text-gray-500 text-sm mt-6">
+       <p className="text-center text-gray-500 text-sm mt-6">
           Don&apos;t have an account?{" "}
-          <span className="text-blue-600 font-medium cursor-pointer hover:underline">
+          <Link
+            to="/register"
+            className="text-blue-600 font-medium hover:underline"
+          >
             Register
-          </span>
+          </Link>
         </p>
       </div>
     </div>
