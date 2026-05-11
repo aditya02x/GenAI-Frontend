@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +15,8 @@ const Register = () => {
       email,
       password,
     });
+
+    navigate("/login");
   };
 
   return (
@@ -86,9 +90,12 @@ const Register = () => {
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm mt-6">
           Already have an account?{" "}
-          <span className="text-indigo-600 font-medium cursor-pointer hover:underline">
+          <Link
+            to="/login"
+            className="text-indigo-600 font-medium hover:underline"
+          >
             Login
-          </span>
+          </Link>
         </p>
       </div>
     </div>
