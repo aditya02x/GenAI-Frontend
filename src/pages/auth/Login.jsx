@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import { useNavigate } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import api from "../../services/api.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({
-      email,
-      password,
-    });
+    try {
+      const response = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
-    navigate("/profile")
+      console.log(response.data);
+
+      navigate("/profile");
+    } catch (error) {
+      console.log(error.response?.data || error.message);
+    }
   };
 
   return (
@@ -80,7 +86,7 @@ const Login = () => {
         </form>
 
         {/* Footer */}
-       <p className="text-center text-gray-500 text-sm mt-6">
+        <p className="text-center text-gray-500 text-sm mt-6">
           Don&apos;t have an account?{" "}
           <Link
             to="/register"
